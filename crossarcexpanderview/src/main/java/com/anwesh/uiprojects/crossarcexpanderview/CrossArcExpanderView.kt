@@ -196,4 +196,27 @@ class CrossArcExpanderView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : CrossArcExpanderView) {
+
+        private val cae : CrossArcExpander = CrossArcExpander(0)
+        private val animator : Animator = Animator(view)
+        private val paint : Paint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+        fun render(canvas : Canvas) {
+            canvas.drawColor(backColor)
+            cae.draw(canvas, paint)
+            animator.animate {
+                cae.update {
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            cae.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
