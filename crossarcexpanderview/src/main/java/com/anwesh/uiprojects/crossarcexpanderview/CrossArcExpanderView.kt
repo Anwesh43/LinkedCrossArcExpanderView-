@@ -221,4 +221,13 @@ class CrossArcExpanderView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+
+        fun create(activity : Activity) : CrossArcExpanderView {
+            val view : CrossArcExpanderView = CrossArcExpanderView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
